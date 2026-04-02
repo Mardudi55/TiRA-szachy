@@ -1,6 +1,6 @@
 import java.util.List;
 
-record Position(int row, int col) {
+record Position(int col, int row) {
 }
 
 public interface Figure {

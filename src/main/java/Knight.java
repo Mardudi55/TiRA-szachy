@@ -11,8 +11,8 @@ public class Knight implements Figure {
     @Override
     public List<Position> calculateAttack(Position position, Chessboard board) {
         List<Position> attacks = new ArrayList<>();
-        int startX = position.row();
-        int startY = position.col();
+        int startX = position.col();
+        int startY = position.row();
 
         int[][] startingVectors = {
                 {1, 2}, {2, 1}, {2, -1}, {1, -2},
@@ -77,6 +77,10 @@ public class Knight implements Figure {
                 } else if (landedField.getType() == FieldType.MIRROR_VERTICAL) {
                     dx = -dx;
                     continue;
+                }
+
+                if (landedField.getType() == FieldType.OBSTACLE) {
+                    break;
                 }
 
                 Position attackSquare = new Position(currX, currY);

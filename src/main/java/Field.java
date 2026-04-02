@@ -7,7 +7,7 @@ enum FieldType {
 
 public class Field {
     private FieldType type;
-    private Figure figure; // null, jeśli nikt tu nie stoi
+    private Figure figure;
 
     public Field(FieldType type) {
         this.type = type;
