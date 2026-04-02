@@ -46,7 +46,6 @@ public class Knight implements Figure {
                         dx = -dx;
                     }
                 }
-
                 while (nextY < 0 || nextY >= N) {
                     if (nextY < 0) {
                         nextY = -nextY;
@@ -57,25 +56,34 @@ public class Knight implements Figure {
                     }
                 }
 
+                int jumpcounter = 0;
                 currX = nextX;
                 currY = nextY;
                 Field landedField = board.getField(currX, currY);
 
                 if (landedField.getType() == FieldType.MIRROR_SLASH) {
+                    if (jumpcounter>0) {
+                        currX+=dx;
+                        currY+=dy;
+                    }
                     int temp = dx;
                     dx = -dy;
                     dy = -temp;
+                    jumpcounter++;
                     continue;
                 } else if (landedField.getType() == FieldType.MIRROR_BACKSLASH) {
                     int temp = dx;
                     dx = dy;
                     dy = temp;
+                    jumpcounter++;
                     continue;
                 } else if (landedField.getType() == FieldType.MIRROR_HORIZONTAL) {
-                    dy = -dy;
+                    dx = -dx;
+                    jumpcounter++;
                     continue;
                 } else if (landedField.getType() == FieldType.MIRROR_VERTICAL) {
-                    dx = -dx;
+                    dy = -dy;
+                    jumpcounter++;
                     continue;
                 }
 

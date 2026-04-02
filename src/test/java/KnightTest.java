@@ -61,13 +61,13 @@ class KnightTest {
 
     @Test
     void IsThereObstacle() {
-        board.setFieldType(1, 5, FieldType.OBSTACLE);
-        board.setFieldType(3, 5, FieldType.OBSTACLE);
+        board.setFieldType(5, 1, FieldType.OBSTACLE);
+        board.setFieldType(5, 3, FieldType.OBSTACLE);
 
-        List<Position> attacks = figure.calculateAttack(new Position(1, 6), board);
+        List<Position> attacks = figure.calculateAttack(new Position(6, 1), board);
 
-        assertFalse(attacks.contains(new Position(1, 5)));
-        assertFalse(attacks.contains(new Position(3, 5)));
+        assertFalse(attacks.contains(new Position(5, 1)));
+        assertFalse(attacks.contains(new Position(5, 3)));
         assertEquals(6, attacks.toArray().length);
     }
 
@@ -77,12 +77,41 @@ class KnightTest {
         board.setFieldType(5,6 , FieldType.MIRROR_BACKSLASH);
         board.setFieldType(3,6 , FieldType.MIRROR_VERTICAL);
         board.setFieldType(3,2 , FieldType.MIRROR_HORIZONTAL);
+        board.setFieldType(5,2 , FieldType.MIRROR_SLASH);
+        board.setFieldType(7,1 , FieldType.OBSTACLE);
 
         List<Position> attacks = figure.calculateAttack(new Position(4,4 ), board);
 
         IO.println(attacks.toString());
+
         assertFalse(attacks.contains(new Position(6,5)));
+        assertFalse(attacks.contains(new Position(5,6)));
+        assertFalse(attacks.contains(new Position(3,6)));
+        assertFalse(attacks.contains(new Position(3,2)));
+        assertFalse(attacks.contains(new Position(7,1)));
+
+        assertTrue(attacks.contains(new Position(7,7)));
         assertTrue(attacks.contains(new Position(5,3)));
+        assertTrue(attacks.contains(new Position(2,5)));
+        assertTrue(attacks.contains(new Position(2,4)));
+
+    }
+    @Test
+    void IsMultipleKnightsCooperating(){
+        List<Position> attacks1 = figure.calculateAttack(new Position(1,6 ), board);
+        List<Position> attacks2 = figure.calculateAttack(new Position(3,7 ), board);
+//        board.setFieldType(4,2 , FieldType.MIRROR_SLASH);
+//        board.setFieldType(2,4 , FieldType.MIRROR_VERTICAL);
+
+        IO.println(attacks1.toString());
+        IO.println(attacks2.toString());
+        assertFalse(attacks1.contains(new Position(3,7)));
+        assertFalse(attacks2.contains(new Position(1,6)));
+
+
+
 
     }
 }
+
+
