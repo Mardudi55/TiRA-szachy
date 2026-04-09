@@ -1,12 +1,9 @@
-import java.util.ArrayList;
-import java.util.List;
-
 enum Color {
     WHITE, BLACK
 }
 
 record ChessBoardPosition(Figure figure, Color color) {
-};
+}
 
 public class Chessboard {
     private final int size;
@@ -16,9 +13,9 @@ public class Chessboard {
         this.size = size;
         this.table = new Field[size][size];
 
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                table[i][j] = new Field(FieldType.EMPTY);
+        for (int y = 0; y < size; y++) {
+            for (int x = 0; x < size; x++) {
+                table[y][x] = new Field(FieldType.EMPTY);
             }
         }
     }
@@ -27,20 +24,20 @@ public class Chessboard {
         return size;
     }
 
-    public Field getField(int row, int col) {
-        if (isWithinBounds(row, col)) {
-            return table[row][col];
+    public Field getField(int x, int y) {
+        if (isWithinBounds(x, y)) {
+            return table[y][x];
         }
         return null;
     }
 
-    public void setFieldType(int row, int col, FieldType type) {
-        if (isWithinBounds(row, col)) {
-            table[row][col].setType(type);
+    public void setFieldType(int x, int y, FieldType type) {
+        if (isWithinBounds(x, y)) {
+            table[y][x].setType(type);
         }
     }
 
-    public boolean isWithinBounds(int row, int col) {
-        return row >= 0 && row < size && col >= 0 && col < size;
+    public boolean isWithinBounds(int x, int y) {
+        return x >= 0 && x < size && y >= 0 && y < size;
     }
 }

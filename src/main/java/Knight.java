@@ -11,8 +11,8 @@ public class Knight implements Figure {
     @Override
     public List<Position> calculateAttack(Position position, Chessboard board) {
         List<Position> attacks = new ArrayList<>();
-        int startX = position.col();
-        int startY = position.row();
+        int startX = position.x();
+        int startY = position.y();
 
         int[][] startingVectors = {
                 {1, 2}, {2, 1}, {2, -1}, {1, -2},
@@ -56,39 +56,31 @@ public class Knight implements Figure {
                     }
                 }
 
-                int jumpcounter = 0;
                 currX = nextX;
                 currY = nextY;
+
                 Field landedField = board.getField(currX, currY);
 
+                if (landedField.getType() == FieldType.OBSTACLE || landedField.getFigure() != null) {
+                    break;
+                }
+
                 if (landedField.getType() == FieldType.MIRROR_SLASH) {
-                    if (jumpcounter>0) {
-                        currX+=dx;
-                        currY+=dy;
-                    }
                     int temp = dx;
                     dx = -dy;
                     dy = -temp;
-                    jumpcounter++;
                     continue;
                 } else if (landedField.getType() == FieldType.MIRROR_BACKSLASH) {
                     int temp = dx;
                     dx = dy;
                     dy = temp;
-                    jumpcounter++;
                     continue;
                 } else if (landedField.getType() == FieldType.MIRROR_HORIZONTAL) {
                     dx = -dx;
-                    jumpcounter++;
                     continue;
                 } else if (landedField.getType() == FieldType.MIRROR_VERTICAL) {
                     dy = -dy;
-                    jumpcounter++;
                     continue;
-                }
-
-                if (landedField.getType() == FieldType.OBSTACLE) {
-                    break;
                 }
 
                 Position attackSquare = new Position(currX, currY);
