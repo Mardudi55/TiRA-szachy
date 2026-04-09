@@ -1,5 +1,3 @@
-import java.util.List;
-
 enum FieldType {
     EMPTY, OBSTACLE, MIRROR_VERTICAL, MIRROR_HORIZONTAL, MIRROR_SLASH, MIRROR_BACKSLASH
 }
