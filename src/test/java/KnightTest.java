@@ -3,7 +3,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 /**
@@ -209,5 +209,19 @@ class KnightTest {
             List<Position> attacks = figure.calculateAttack(new Position(4, 4), board);
             assertThat(attacks).isNotNull();
         }, "Wykryto nieskończoną pętlę w lustrach!");
+    }
+
+    @Test
+    void IsOutOfTheBoard(){
+        board.setFigure(8,8,new Knight());
+        Field spot=board.getField(8,8);
+        assertNull(spot);
+    }
+
+    @Test
+    void IsTheSamePlacedFigure(){
+        board.setFigure(5,6,new Knight());
+        board.setFieldType(5,6,FieldType.MIRROR_VERTICAL);
+        assertFalse(board.getField(5,6).equals(FieldType.MIRROR_VERTICAL));
     }
 }

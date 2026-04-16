@@ -32,12 +32,12 @@ public class Chessboard {
     }
 
     public void setFieldType(int x, int y, FieldType type) {
-        if (isWithinBounds(x, y)) {
+        if (isWithinBounds(x, y)&& table[x][y].getFigure()!=null) {
             table[y][x].setType(type);
         }
     }
     public void setFigure(int x, int y, Figure figure) {
-        if (isWithinBounds(x, y)) {
+        if (isWithinBounds(x, y)&& table[x][y].getFigure()!=null) {
             table[y][x].setFigure(figure);
         }
     }
