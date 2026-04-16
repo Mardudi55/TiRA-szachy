@@ -75,10 +75,10 @@ public class Knight implements Figure {
                     dx = dy;
                     dy = temp;
                     continue;
-                } else if (landedField.getType() == FieldType.MIRROR_HORIZONTAL) {
+                } else if (landedField.getType() == FieldType.MIRROR_VERTICAL) {
                     dx = -dx;
                     continue;
-                } else if (landedField.getType() == FieldType.MIRROR_VERTICAL) {
+                } else if (landedField.getType() == FieldType.MIRROR_HORIZONTAL) {
                     dy = -dy;
                     continue;
                 }

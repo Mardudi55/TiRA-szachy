@@ -10,8 +10,8 @@ public class Chessboard {
     private final Field[][] table;
 
     public Chessboard(int size) {
-        this.size = size;
-        this.table = new Field[size][size];
+        this.size = Math.abs(size);
+        this.table = new Field[this.size][this.size];
 
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
@@ -34,6 +34,11 @@ public class Chessboard {
     public void setFieldType(int x, int y, FieldType type) {
         if (isWithinBounds(x, y)) {
             table[y][x].setType(type);
+        }
+    }
+    public void setFigure(int x, int y, Figure figure) {
+        if (isWithinBounds(x, y)) {
+            table[y][x].setFigure(figure);
         }
     }
 
