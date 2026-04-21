@@ -11,9 +11,13 @@ public class Knight implements Figure {
     @Override
     public List<Position> calculateAttack(Position position, Chessboard board) {
         List<Position> attacks = new ArrayList<>();
+        int N = board.getSize();
         int startX = position.x();
         int startY = position.y();
 
+        if (startX < 0 || startX >= N || startY < 0 || startY >= N) {
+            return new ArrayList<>();
+        }
         int[][] startingVectors = {
                 {1, 2}, {2, 1}, {2, -1}, {1, -2},
                 {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}
@@ -35,7 +39,6 @@ public class Knight implements Figure {
 
                 int nextX = currX + dx;
                 int nextY = currY + dy;
-                int N = board.getSize();
 
                 while (nextX < 0 || nextX >= N) {
                     if (nextX < 0) {

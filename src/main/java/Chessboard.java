@@ -28,17 +28,31 @@ public class Chessboard {
         if (isWithinBounds(x, y)) {
             return table[y][x];
         }
+        if (x < 0 || y < 0 || x >= size || y >= size) return null;
         return null;
     }
 
     public void setFieldType(int x, int y, FieldType type) {
-        if (isWithinBounds(x, y)&& table[x][y].getFigure()!=null) {
-            table[y][x].setType(type);
+        // Sprawdzamy czy w ogóle jesteśmy na planszy
+        if (isWithinBounds(x, y)) {
+            Field field = table[y][x];
+            // Możemy postawić lustro/przeszkodę TYLKO gdy pole jest puste
+            // I nie ma na nim żadnej figury
+            if (field.getType() == FieldType.EMPTY && field.getFigure() == null) {
+                field.setType(type);
+            }
         }
     }
+
     public void setFigure(int x, int y, Figure figure) {
-        if (isWithinBounds(x, y)&& table[x][y].getFigure()!=null) {
-            table[y][x].setFigure(figure);
+        // Sprawdzamy czy w ogóle jesteśmy na planszy
+        if (isWithinBounds(x, y)) {
+            Field field = table[y][x];
+            // Możemy postawić figurę TYLKO gdy na polu nie ma innej figury
+            // I pole nie jest przeszkodą/lustrem (czyli jest EMPTY)
+            if (field.getFigure() == null && field.getType() == FieldType.EMPTY) {
+                field.setFigure(figure);
+            }
         }
     }
 
